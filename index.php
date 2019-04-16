@@ -27,6 +27,13 @@
                 }
             });
         }
+
+        function tastoEnter() {
+            var tasto = window.event.keyCode;
+            if (tasto == 13) {
+                Login();
+            }
+        }
     </script>
 </head>
 
@@ -61,7 +68,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox small">
-                                            <input type="checkbox" class="custom-control-input" id="customCheck">
+                                            <input type="checkbox" class="custom-control-input" onkeyup="tastoEnter()" id="customCheck">
                                             <label class="custom-control-label" for="customCheck">Remember Me</label>
                                         </div>
                                     </div>
