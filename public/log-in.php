@@ -5,17 +5,30 @@
  * Date: 05/03/2019
  * Time: 09:29
  */
+
+/*
+ * ESITI:
+ * - 0 => LOG ESATTO
+ * - 1 => PWD ERRATA
+ * - 2 => UTENTE INESISTENTE
+ */
 session_start();
 $id_utente = filter_input(INPUT_POST, "id_utente",FILTER_SANITIZE_STRING);
 $pwd = filter_input(INPUT_POST,"pwd", FILTER_SANITIZE_STRING);
-
+$esito = 0;
 include_once "../Classi/utente.php";
-$utente = new utente($id_utente,"","","","","");
+$utente = new utente($id_utente);
 $esiste = $utente->isUtente();
 if($esiste == true){
+    $utente->setDati();
     if($utente->verifyPassword($pwd)){
         $_SESSION['login']= true;
         $_SESSION['id_utente'] = $id_utente;
         $_SESSION['flag_admin']= $id_utente->getFlag();
+    } else {
+        $esito = 1;
     }
+} else {
+    $esito = 2;
 }
+echo $esito;

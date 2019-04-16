@@ -32,12 +32,20 @@ class utente
      * @param $pwd
      * @param $flag_admin
      */
-    public function setDati($nome, $cognome, $email, $pwd, $flag_admin){
-        $this->nome = $nome;
-        $this->cognome = $cognome;
-        $this->email = $email;
-        $this->pwd = $pwd;
-        $this->flag_admin = $flag_admin;
+    public function setDati(){
+        include_once "../pdo.php";
+        $this->pdo = connessione_normale();
+        try{
+            $ogg = $this->pdo->query("SELECT * FROM utenti WHERE username = '$this->username'")->fetch(PDO::FETCH_OBJ);
+            $this->nome = $ogg->nome;
+            $this->cognome = $ogg->cognome;
+            $this->email = $ogg->email;
+            $this->pwd = $ogg->pwd;
+            $this->flag_admin = $ogg->flag_admin;
+        } catch (PDOException $e){
+            echo $e->getMessage();
+        }
+        $this->pdo = null;
     }
 
 

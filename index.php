@@ -15,10 +15,12 @@
             $.ajax({
                 type: "POST",
                 url: "/script/utenti.php",
-                data: "nome=" + nome + "&cognome=" + cognome,
+                data: "id_utente=" + id_utente + "&pwd=" + pwd,
                 dataType: "html",
                 success: function(risposta) {
-
+                    if(risposta == 0){
+                        window.location.href="DashBoard"
+                    }
                 },
                 error: function(){
                     alert("Chiamata fallita!!!");
@@ -63,7 +65,7 @@
                                             <label class="custom-control-label" for="customCheck">Remember Me</label>
                                         </div>
                                     </div>
-                                    <a href="index.php" class="btn btn-primary btn-user btn-block">
+                                    <a href="#" onclick="Login();" class="btn btn-primary btn-user btn-block">
                                         Login
                                     </a>
                                 </form>
